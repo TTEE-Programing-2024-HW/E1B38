@@ -23,12 +23,21 @@ int main(void){
 	system("pause");        //暫停程式 按任一鍵繼續 
 	system("cls");          //按任一鍵清除 
 	
-	int a=0,p;                  //設定整數變數 ,密碼輸入次數 
-	while(a<3){
+	int a=3,p;                  //設定整數變數 ,密碼限制輸入次數 
+	
 	printf("請輸入4個數字的密碼:");
 	scanf("%d",&p);  //輸入密碼
-	getchar(); // 消耗換行符 
-	if(p==2024){            //檢查密碼對不對 
+		while (p!=2024 && a>1) {	// 密碼驗證
+        printf("密碼錯誤!!你還有%d次機會\n",--a);
+        printf("請重新輸入4位數的密碼: ");
+        scanf("%d", &p);
+        } 
+        if (p!=2024) {              // 驗證失敗
+        printf("密碼錯誤! 程式結束.\n");
+        return 1;
+    }
+	 
+		getchar();			// 消耗換行符
 		system("cls");      //按任一鍵清除
 		printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   //個人風格表格 
 		printf("------------------------------\n");
@@ -51,21 +60,32 @@ int main(void){
                     printf("請輸入一個(a-n)的字母:"); // 印出直角三角形
                     scanf("%c",&z);
                     getchar(); // 消耗換行符
-                    Triangle(z);
-					break;
+                    while (z < 'a' || z > 'n') {
+        			printf("錯誤，輸入字元不在 'a' 至 'n' 區間\n");
+        			printf("請重新輸入一個(a-n)的字母:");
+        			scanf("%c",&z); // 再次讀取輸入
+        			getchar(); // 消耗換行符
+    				}
+          	      	Triangle(z);
+          	      	break;
                 case 'b':
                     system("cls");
-                    int num;
+                    int n,num;
                     printf("請輸入一個1至9的整數n：");
                     scanf("%d", &num);
-                    getchar(); // 消耗換行符
+                    getchar();
+                    while(num<1 || num>9) {
+        			printf("錯誤，請輸入1至9之間的整數\n");
+        			scanf("%d", &num);
+        			getchar();
+    				}
                     mult(num); // 顯示乘法表
                     break;
                 case 'c':
                     printf("Continue? (y/n): "); //是否繼續 
                     char k;
                 	scanf("%c",&k);
-                	getchar(); // 消耗換行符
+                	getchar();
                 	if (k=='y' || k=='Y') {
                             break;            // 回到選項輸入
                         } else if (k=='n' || k=='N') {
@@ -77,11 +97,7 @@ int main(void){
                 default:
                     printf("錯誤: 輸入字元不在 'a' 至 'c' 區間\n");
                 }
-	}else{
-		a++;
-		printf("密碼錯誤!! 您還有 %d 次嘗試機會\n", 3-a);
-		} 
-}
+
 		
 	
 	
@@ -108,11 +124,6 @@ void Triangle(char ch){   //三角形的函數
 
 // 顯示乘法表的函式
 void mult(int n) {
-    // 檢查輸入是否在範圍內
-    if (n<1 || n>9) {
-        printf("錯誤：請輸入1至9之間的整數\n");
-        return;
-    }
     printf("乘法表：\n");          //產生乘法表
     int i,j;
     for(i=1;i<=n;++i) {
