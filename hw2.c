@@ -27,7 +27,7 @@ int main(void){
 	while(a<3){
 	printf("請輸入4個數字的密碼:");
 	scanf("%d",&p);  //輸入密碼
-
+	getchar(); // 消耗換行符 
 	if(p==2024){            //檢查密碼對不對 
 		system("cls");      //按任一鍵清除
 		printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   //個人風格表格 
@@ -43,13 +43,14 @@ int main(void){
 		char choice;
             printf("請輸入選項 (a-c): ");
             scanf("%c", &choice); // 讀取選項
-
+			getchar();
             switch (choice) {
                 case 'a':
                 	system("cls");
                 	char z;
                     printf("請輸入一個(a-n)的字母:"); // 印出直角三角形
                     scanf("%c",&z);
+                    getchar(); // 消耗換行符
                     Triangle(z);
 					break;
                 case 'b':
@@ -57,12 +58,14 @@ int main(void){
                     int num;
                     printf("請輸入一個1至9的整數n：");
                     scanf("%d", &num);
+                    getchar(); // 消耗換行符
                     mult(num); // 顯示乘法表
                     break;
                 case 'c':
                     printf("Continue? (y/n): "); //是否繼續 
                     char k;
                 	scanf("%c",&k);
+                	getchar(); // 消耗換行符
                 	if (k=='y' || k=='Y') {
                             break;            // 回到選項輸入
                         } else if (k=='n' || k=='N') {
@@ -87,7 +90,7 @@ int main(void){
 	}
 	
 void Triangle(char ch){   //三角形的函數 
-    int i, j;
+    int i,j;
     int rows = ch-'a'+1; // 輸入字元計算要印出幾行
 
     for (i=0; i<rows;i++){
@@ -111,8 +114,9 @@ void mult(int n) {
         return;
     }
     printf("乘法表：\n");          //產生乘法表
-    for (int i=1;i<=n;++i) {
-        for (int j=1;j<=n;++j) {
+    int i,j;
+    for(i=1;i<=n;++i) {
+        for (j=1;j<=n;++j) {
             printf("%d*%d =%-3d",i,j,i*j);   //%-3d使得排版整齊
         }
         printf("\n");
