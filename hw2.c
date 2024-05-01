@@ -23,7 +23,8 @@ int main(void){
 	system("pause");        //暫停程式 按任一鍵繼續 
 	system("cls");          //按任一鍵清除 
 	
-	int a=3,p;                  //設定整數變數 ,密碼限制輸入次數 
+	int a=3,p;
+    int con=1;                  //設定整數變數 ,密碼限制輸入次數 
 	
 	printf("請輸入4個數字的密碼:");
 	scanf("%d",&p);  //輸入密碼
@@ -36,8 +37,8 @@ int main(void){
         printf("密碼錯誤! 程式結束.\n");
         return 1;
     }
-	 
-		getchar();			// 消耗換行符
+	 while(con){
+	 	getchar();			// 消耗換行符
 		system("cls");      //按任一鍵清除
 		printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   //個人風格表格 
 		printf("------------------------------\n");
@@ -87,20 +88,22 @@ int main(void){
                 	scanf("%c",&k);
                 	getchar();
                 	if (k=='y' || k=='Y') {
-                            break;            // 回到選項輸入
+                            con=1;         // 回到選項輸入
                         } else if (k=='n' || k=='N') {
-                            return 0;         // 結束程式
+                           con=0;         // 結束程式
                         } else {
-                            printf("錯誤：請輸入 'y' 或 'n'\n");
+                            while(k!='n' || k!='y'){
+							printf("錯誤：請輸入 'y' 或 'n'\n");
+							scanf("%c",&k);
+                			getchar();
+						}
+                            con=1;
                         }
                         break;
                 default:
                     printf("錯誤: 輸入字元不在 'a' 至 'c' 區間\n");
                 }
-
-		
-	
-	
+            }
 	system("pause");
 	return 0;
 	}
