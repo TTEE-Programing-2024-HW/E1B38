@@ -81,14 +81,28 @@ int main(void){
                     	}
                    	}
     				}else if(s == 4){
+    					int o;
+    					printf("請選擇一種前後兩列各兩個座位(1)/連續4個(2):");
+    					scanf("%d",&o);
+    					if(o==1){
+               			int start_row = rand() % (9-1);
+               			int start_col = rand() % (9-1) ;
+               			for (i=start_row;i<start_row+2;i++) {
+                    	for (j=start_col;j<start_col+2;j++){
+                        seat[i][j] = '@';
+                    		}
+						}
+					}
+    					if(o==2){
                			int start_row = rand() % (9 - 1 + 1) + 1; //隨機行(1-8) 
                 		int start_col = rand() % (9 - 3 + 1); //隨機列(1-5) 
                 		for (i=0;i<4;i++) {
                 		if(seat[start_row][start_col + i] !='*'){
                     	seat[start_row][start_col + i] = '@'; //連續4個@ 
-                    }
-                }
+                    		}
+                		}
 					}
+				}
     					printf("更新後的座位表：\n");
     					displayseat();
     					char faction;
