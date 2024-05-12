@@ -2,6 +2,7 @@
 #include<stdlib.h>
 void displayseat();
 void setseat();
+char seatingChart[9][9];
 int main(void){
 	
 	printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   //礶 
@@ -39,6 +40,7 @@ int main(void){
         return 1;
     }
 	 while(con){
+	 	setseat();
 	 	getchar();			// 传︽才
 		system("cls");      //ヴ龄睲埃
 		printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   // 
@@ -60,7 +62,6 @@ int main(void){
             switch (choice) {
                 case 'a':
                 	system("cls");
-                	setseat();
                 	displayseat();
           	      	break;
                 case 'b':
@@ -96,7 +97,6 @@ int main(void){
 	}
 	
 void displayseat(){
-	char seatingChart[9][9];
 	int i,j;
 	printf("\\123456789\n");    //郴场畒腹絏
     for (i=0;i<9;i++){
@@ -108,7 +108,6 @@ void displayseat(){
     }
 }
 void setseat(){
-	char seatingChart[9][9];
 	//﹍て畒┮Τ畒常琌
 	int i,j,k;
     for(i=0;i<9;i++) {
