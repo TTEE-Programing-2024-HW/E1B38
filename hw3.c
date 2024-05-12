@@ -1,7 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+void displayseat();
+void setseat();
 int main(void){
+	
 	printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   //個人風格畫面 
 	printf("||名子:李維濬               ||\n");
 	printf("------------------------------\n");
@@ -41,7 +43,7 @@ int main(void){
 		system("cls");      //按任一鍵清除
 		printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   //個人風格表格 
 		printf("------------------------------\n");
-		printf("||a. 可用的座位             ||\n");
+		printf("||a. 顯示座位             ||\n");
 		printf("------------------------------\n");
 		printf("||b. 自動安排座位           ||\n");
 		printf("------------------------------\n");
@@ -58,7 +60,8 @@ int main(void){
             switch (choice) {
                 case 'a':
                 	system("cls");
-                	
+                	setseat();
+                	displayseat();
           	      	break;
                 case 'b':
                     system("cls");
@@ -92,6 +95,34 @@ int main(void){
 	return 0;
 	}
 	
-
+void displayseat(){
+	char seatingChart[9][9];
+	int i,j;
+	printf("\\123456789\n");    //頂部的座位號碼
+    for (i=0;i<9;i++){
+        printf("%d",9-i);       //打印座位表的行號
+        for (j=0;j<9;j++){
+            printf("%c",seatingChart[i][j]); //打印座位狀態
+        }
+        printf("\n"); // 換行
+    }
+}
+void setseat(){
+	char seatingChart[9][9];
+	//初始化座位表，所有座位都是空的
+	int i,j,k;
+    for(i=0;i<9;i++) {
+        for(j=0;j<9;j++){
+            seatingChart[i][j]='-';
+        }
+    }
+    // 隨機將10個座位標記為已預訂
+    srand((unsigned int)time(NULL));    //設置rand()函數的隨機種子為當前時間的秒數，以便在程序運行時生成不同的隨機數序列。
+    for(k=0;k<10;k++) {                 //time(NULL) 函數返回自協調世界時間1970年1月1日00:00:00開始的秒數。因為時間總是在變化，所以它通常被用作隨機種子
+        int row=rand() % 9;
+        int col=rand() % 9;
+        seatingChart[row][col]='*';
+    }
+}
 
 
