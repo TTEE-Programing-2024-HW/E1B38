@@ -2,6 +2,8 @@
 #include<stdlib.h>
 void displayseat();
 void setseat();
+void log1seat();
+void log2seat();
 char seat[9][9];
 int main(void){
 	setseat();
@@ -94,9 +96,11 @@ int main(void){
     					scanf(" %c", &faction); // 加一個空格以忽略之前的換行符
     					getchar();              // 消耗換行符
     					if (faction== 'y' || faction=='Y'){
+    						log1seat();
         					system("cls");
 							break; 
     						}else if (faction== 'n' || faction=='N'){
+    						log2seat();
         					system("cls");
 							break;
     						}else{
@@ -148,9 +152,9 @@ void setseat(){
 	int i,j,k;
     for(i=0;i<9;i++) {
         for(j=0;j<9;j++){
-            seat[i][j]='-';
+                seat[i][j] = '-';
+            }
         }
-    }
     // 隨機將10個座位標記為已預訂
     srand((unsigned int)time(NULL));    //設置rand()函數的隨機種子為當前時間的秒數，以便在程序運行時生成不同的隨機數序列。
 	int mark=0;               //time(NULL) 函數返回自協調世界時間1970年1月1日00:00:00開始的秒數。因為時間總是在變化，所以它通常被用作隨機種子 
@@ -161,6 +165,27 @@ void setseat(){
     	seat[row][col] = '*';
     	mark++;
     	}
+	} 
+}
+
+void log1seat(){
+	int i,j;
+	for(i=0;i<9;i++) {
+        for(j=0;j<9;j++){
+        	if(seat[i][j]=='@'){
+        		seat[i][j]='*';
+       		}	
+    	}
 	}
-} 
+}
+void log2seat(){
+	int i,j;
+	for(i=0;i<9;i++) {
+        for(j=0;j<9;j++){
+        	if(seat[i][j]=='@'){
+        		seat[i][j]='-';
+        	}
+   		}
+	}
+}
 
