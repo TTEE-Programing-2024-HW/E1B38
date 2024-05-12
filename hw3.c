@@ -2,9 +2,9 @@
 #include<stdlib.h>
 void displayseat();
 void setseat();
-char seatingChart[9][9];
+char seat[9][9];
 int main(void){
-	
+	setseat();
 	printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   //個人風格畫面 
 	printf("||名子:李維濬               ||\n");
 	printf("------------------------------\n");
@@ -25,7 +25,7 @@ int main(void){
 	system("pause");        //暫停程式 按任一鍵繼續 
 	system("cls");          //按任一鍵清除 
 	
-	int a=3,p;
+	int a=3,p,i,j;
     int con=1;                  //設定整數變數 ,密碼限制輸入次數 
 	
 	printf("請輸入4個數字的密碼:");
@@ -40,7 +40,6 @@ int main(void){
         return 1;
     }
 	 while(con){
-	 	setseat();
 	 	getchar();			// 消耗換行符
 		system("cls");      //按任一鍵清除
 		printf("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");   //個人風格表格 
@@ -66,8 +65,44 @@ int main(void){
           	      	break;
                 case 'b':
                     system("cls");
-                    
-                    break;
+                    int s;
+        			printf("請輸入所需座位數量 (1~4): ");
+        			scanf("%d", &s);
+        			getchar();  //消耗換行符
+        			displayseat();
+        			if(s>=1 && s<= 3){
+        				int start_row = rand()%9; // 隨機行 
+                    	int start_col = rand()%(9-s+1); //隨機列 
+                   		for(i=0;i<s;i++) {
+                   		if(seat[start_row][start_col + i] !='*'){
+                        seat[start_row][start_col + i] = '@'; 
+                    	}
+                   	}
+    				}else if(s == 4){
+               			int start_row = rand() % (9 - 1 + 1) + 1; //隨機行(1-8) 
+                		int start_col = rand() % (9 - 3 + 1); //隨機列(1-5) 
+                		for (i=0;i<4;i++) {
+                		if(seat[start_row][start_col + i] !='*'){
+                    	seat[start_row][start_col + i] = '@'; //連續4個@ 
+                    }
+                }
+					}
+    					printf("更新後的座位表：\n");
+    					displayseat();
+    					char faction;
+    					printf("是否滿意座位？(y/n):");
+    					scanf(" %c", &faction); // 加一個空格以忽略之前的換行符
+    					getchar();              // 消耗換行符
+    					if (faction== 'y' || faction=='Y'){
+        					system("cls");
+							break; 
+    						}else if (faction== 'n' || faction=='N'){
+        					system("cls");
+							break;
+    						}else{
+    							printf("請輸入'y'或'n'\n");
+    							continue;// 回到循還開始
+							}
                 case 'c':
                     
                 case 'd':
@@ -96,13 +131,14 @@ int main(void){
 	return 0;
 	}
 	
+	
 void displayseat(){
 	int i,j;
 	printf("\\123456789\n");    //頂部的座位號碼
     for (i=0;i<9;i++){
         printf("%d",9-i);       //打印座位表的行號
         for (j=0;j<9;j++){
-            printf("%c",seatingChart[i][j]); //打印座位狀態
+            printf("%c",seat[i][j]); //打印座位狀態
         }
         printf("\n"); // 換行
     }
@@ -112,16 +148,19 @@ void setseat(){
 	int i,j,k;
     for(i=0;i<9;i++) {
         for(j=0;j<9;j++){
-            seatingChart[i][j]='-';
+            seat[i][j]='-';
         }
     }
     // 隨機將10個座位標記為已預訂
     srand((unsigned int)time(NULL));    //設置rand()函數的隨機種子為當前時間的秒數，以便在程序運行時生成不同的隨機數序列。
-    for(k=0;k<10;k++) {                 //time(NULL) 函數返回自協調世界時間1970年1月1日00:00:00開始的秒數。因為時間總是在變化，所以它通常被用作隨機種子
-        int row=rand() % 9;
-        int col=rand() % 9;
-        seatingChart[row][col]='*';
-    }
-}
-
+	int mark=0;               //time(NULL) 函數返回自協調世界時間1970年1月1日00:00:00開始的秒數。因為時間總是在變化，所以它通常被用作隨機種子 
+	while (mark<10){ 
+    int row=rand() % 9;
+    int col=rand() % 9;
+    if(seat[row][col]!='*'){
+    	seat[row][col] = '*';
+    	mark++;
+    	}
+	}
+} 
 
