@@ -96,6 +96,37 @@ void searchst(int n, struct st students[]) {
     getchar();  // 等待用戶按任意鍵
 }
 
+void sortavg(int n, struct st students[]) {
+    // 平均成績高低順序排序學生信息
+    int i,j;
+    for (i=0;i<n-1;i++) {
+        for (j=0;j<n-i-1;j++) {
+            float avg1 = (students[j].math + students[j].physics + students[j].english) / 3.0;
+            float avg2 = (students[j + 1].math + students[j + 1].physics + students[j + 1].english) / 3.0;
+            if (avg1 < avg2) {
+                // 交換學生信息
+                struct st temp = students[j];
+                students[j] = students[j + 1];
+                students[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void display_sortavg(int n, struct st students[]) {
+    sortavg(n,students); // 先排序
+	int i;
+    // 打印排序后的學生信息
+    printf("按平均成績高低順序列出學生資訊：\n");
+    for (i=0;i<n; ++i) {
+        float avg = (students[i].math + students[i].physics + students[i].english) / 3.0;
+        printf("學生姓名: %s\n", students[i].name);
+        printf("學號: %d\n", students[i].id);
+        printf("平均成績: %.1f\n\n", avg);
+    }
+}
+
+
 int main(void){
 	
 	struct st students[max_st];
@@ -178,7 +209,10 @@ int main(void){
                     break;
                 case 'd':
                 	system("cls");
-                
+    				display_sortavg(stcount,students);
+    				printf("按任意鍵返回主選單...\n");
+   					getchar();  // 等待用戶按任意鍵
+    break;
                 case 'e':
                 	printf("Continue? (y/n): "); //是否繼續 
                     char k;
