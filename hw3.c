@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include <time.h>
 void displayseat();
 void setseat();
 void log1seat();
@@ -123,7 +124,7 @@ int main(void){
     							printf("請輸入'y'或'n'\n");
     							continue;// 回到循還開始
 							}
-                case 'c':
+                case 'c':{
                     printf("請逐一輸入座位選擇，如1-2、2-9代表[列1,行2]及[列2,行9]兩個座位。\n");
                     printf("手動選擇座位:");
                     char seat_choice[5];
@@ -140,6 +141,7 @@ int main(void){
     				displayseat();
     				log1seat();
                 	break;
+                }
                 case 'd':
                 	printf("Continue? (y/n): "); //是否繼續 
                     char k;
@@ -242,4 +244,3 @@ int parse_seat_choice(const char* seat_choice, int* row, int* col) {
     	}
     	return 1; // 座位選擇有效
 }
-
