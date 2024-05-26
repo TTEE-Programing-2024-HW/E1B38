@@ -51,6 +51,20 @@ void inputst(int n,struct st students[]) {
         printf("\n");
     }
 }
+
+void displayst(int n, struct st students[]) {
+    int i;
+    for (i=0;i<n;++i) {
+        float avg = (students[i].math + students[i].physics + students[i].english) / 3.0;
+        printf("學生姓名: %s\n", students[i].name);
+        printf("學號: %d\n", students[i].id);
+        printf("數學成績: %d\n", students[i].math);
+        printf("物理成績: %d\n", students[i].physics);
+        printf("英文成績: %d\n", students[i].english);
+        printf("平均成績: %.1f\n", avg);
+        printf("\n");
+    }
+}
 	
 int main(void){
 	
@@ -125,7 +139,9 @@ int main(void){
                 
                 case 'b':
                 	system("cls");
-                
+                	displayst(stcount,students);
+                	system("pause");  // 暫停以等待使用者按任意鍵
+               		break;
                 case 'c':
                 	system("cls");
                 
