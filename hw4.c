@@ -66,6 +66,36 @@ void displayst(int n, struct st students[]) {
     }
 }
 	
+void searchst(int n, struct st students[]) {
+    char search_name[max_name];
+    int found = 0;
+    int i;
+    printf("請輸入要搜尋的學生姓名: ");
+    scanf("%s", search_name);
+    
+    for (i=0;i<n;++i) {
+        if (strcmp(students[i].name,search_name)==0) {
+            float avg = (students[i].math + students[i].physics + students[i].english) / 3.0;
+            printf("學生姓名: %s\n", students[i].name);
+            printf("學號: %d\n", students[i].id);
+            printf("數學成績: %d\n", students[i].math);
+            printf("物理成績: %d\n", students[i].physics);
+            printf("英文成績: %d\n", students[i].english);
+            printf("平均成績: %.1f\n", avg);
+            printf("\n");
+            found = 1;
+            break;
+        }
+    }
+    
+    if(found!=1) {
+        printf("資料不存在。\n");
+    }
+    
+    printf("按任意鍵返回主選單...\n");
+    getchar();  // 等待用戶按任意鍵
+}
+
 int main(void){
 	
 	struct st students[max_st];
@@ -144,7 +174,8 @@ int main(void){
                		break;
                 case 'c':
                 	system("cls");
-                
+                    searchst(stcount, students);
+                    break;
                 case 'd':
                 	system("cls");
                 
